@@ -1,0 +1,44 @@
+#******************************************************************************#
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: otiniako <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/07/02 16:17:52 by otiniako          #+#    #+#              #
+#    Updated: 2018/07/02 16:17:53 by otiniako         ###   ########.fr        #
+#                                                                              #
+#******************************************************************************#
+
+NAME = lem_in
+
+FLAGS = -I includes/
+
+LIB = libft/libft.a
+
+SRC = src/lem_in.c\
+		src/ft_valid.c\
+
+OBJ = $(SRC:.c=.o)
+
+all: $(LIB) $(NAME)
+
+$(LIB):
+	@make -C libft/
+
+$(NAME): $(OBJ)
+	@gcc -o $(NAME) $(OBJ) $(LIB)
+	@echo "\033[1;92mlem_in are created!\033[1;92m"
+
+$(OBJ): %.o: %.c
+	@gcc -c $(FLAGS) -o $@ -c $<
+
+clean:
+	@make -C libft/ clean
+	@rm -f $(OBJ)
+
+fclean: clean
+	@rm -rf $(NAME)
+	@make -C libft/ fclean
+
+re: fclean all
