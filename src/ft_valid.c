@@ -12,6 +12,40 @@
 
 #include <lem_in.h>
 
+int		ft_count_links(t_room *tmp, t_link *links, int j, int i)
+{
+	t_link *tab;
+
+	tab = links;
+	while (tab)
+	{
+		if (!ft_strcmp(tmp->name, tab->r1->name) ||
+		!ft_strcmp(tmp->name, tab->r2->name))
+		{
+			if (j == 1)
+				tmp->linked_to[i] = ft_strcmp(tmp->name, tab->r1->name) ?
+												tab->r1 : tab->r2;
+			i++;
+		}
+		tab = tab->next;
+	}
+	return (i);
+}
+
+void	ft_rooms_links(t_lem_in *lem)
+{
+	t_room	*tmp;
+
+	tmp = lem->rooms;
+	while (tmp)
+	{
+		tmp->nb_links = ft_count_links(tmp, lem->links, 0, 0);
+		tmp->linked_to = (t_room **)malloc(sizeof(t_room *) * tmp->nb_links);
+		ft_count_links(tmp, lem->links, 1, 0);
+		tmp = tmp->next;
+	}
+}
+
 int		ft_comment(char *str, t_lem_in *lem)
 {
 	if (str[0] == '#')

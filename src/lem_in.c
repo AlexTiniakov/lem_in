@@ -12,6 +12,23 @@
 
 #include <lem_in.h>
 
+int		ft_check_repeat(t_lem_in *lem, t_link *tmp)
+{
+	t_link	*tab;
+
+	tab = lem->links;
+	while (tab)
+	{
+		if ((!ft_strcmp(tab->r1->name, tmp->r1->name) &&
+		!ft_strcmp(tab->r2->name, tmp->r2->name)) ||
+		(!ft_strcmp(tab->r1->name, tmp->r2->name) &&
+		!ft_strcmp(tab->r2->name, tmp->r1->name)))
+			return (1);
+		tab = tab->next;
+	}
+	return (0);
+}
+
 int		ft_links(char *str, t_lem_in *lem, int *i)
 {
 	char	**s;
@@ -29,6 +46,11 @@ int		ft_links(char *str, t_lem_in *lem, int *i)
 		{
 			ft_memdel((void **)&tmp);
 			return (ft_del_av(s));
+		}
+		if (ft_check_repeat(lem, tmp))
+		{
+			ft_memdel((void **)&tmp);
+			return (ft_del_av(s) + 1);
 		}
 		tmp->next = lem->links;
 		lem->links = tmp;
@@ -97,6 +119,7 @@ int		main(int ac, char **av)
 	char	*str;
 	t_lem_in	lem;
 
+	lem.rooms = NULL;
 	if ((fd = ac < 2 ? 1 : open(av[1], O_RDONLY)) == -1)
 		return (_ERR + system("leaks -q lem_in"));
 	while (get_next_line(fd, &str))
@@ -108,7 +131,9 @@ int		main(int ac, char **av)
 		}
 		ft_memdel((void **)&str);
 	}
-	//ft_printf("i = %i\n", lem.nb_ant);
+	ft_rooms_links(&lem);
+	ft_ways(&lem);
+	//ft_printf("i = %s\n", lem.rooms->next->linked_to[0]->name);
 	system("leaks -q lem_in");
 	return (0);
 }
