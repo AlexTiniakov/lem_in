@@ -29,7 +29,7 @@ SRC = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c\
 	ft_putnbr_u_base_fd.c ft_putnbr_u.c ft_printf.c ft_params.c ft_null.c\
 	ft_printf_procent.c ft_tools.c ft_printf_int.c ft_printf_long.c ft_printf_char.c\
 	ft_printf_str.c ft_printf_hex.c ft_printf_octal.c ft_printf_unsign.c\
-	ft_printf_void.c ft_atoi_long.c get_next_line.c ft_str_toupper.c\
+	ft_printf_void.c ft_atoi_long.c get_next_line.c ft_str_toupper.c ft_atoi_uint.c\
 
 OBJ = $(SRC:.c=.o)
 

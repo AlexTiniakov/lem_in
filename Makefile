@@ -19,6 +19,9 @@ LIB = libft/libft.a
 SRC = src/lem_in.c\
 		src/ft_valid.c\
 		src/ft_ways.c\
+		src/ft_turn.c\
+		src/ft_lem.c\
+		src/ft_go.c\
 
 OBJ = $(SRC:.c=.o)
 

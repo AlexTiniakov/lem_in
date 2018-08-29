@@ -77,6 +77,7 @@ int		ft_rooms(char *str, t_lem_in *lem, int *i)
 		tmp->x = ft_atoi(s[1]);
 		tmp->y = ft_atoi(s[2]);
 		tmp->next = lem->rooms;
+		tmp->deep = 0;
 		lem->rooms = tmp;
 		lem->begin = lem->s ? tmp : lem->begin;
 		lem->end = lem->e ? tmp : lem->end;
@@ -96,7 +97,7 @@ int		ft_nb_ant(char *str, t_lem_in *lem, int *i)
 	while(str && str[++j])
 		if (!ft_isdigit((int)str[j]))
 			return (ft_comment(str, lem));
-	if ((lem->nb_ant = ft_atoi(str)) > 0)
+	if ((lem->nb_ant = ft_atoi_uint(str)) > 0)
 		return (++(*i));
 	return (0);
 }
@@ -118,22 +119,42 @@ int		main(int ac, char **av)
 	int		fd;
 	char	*str;
 	t_lem_in	lem;
+	t_ways *tmp1;
+	t_way *w;
 
 	lem.rooms = NULL;
 	if ((fd = ac < 2 ? 1 : open(av[1], O_RDONLY)) == -1)
-		return (_ERR + system("leaks -q lem_in"));
+		return (_ERR);// + system("leaks -q lem_in"));
 	while (get_next_line(fd, &str))
 	{
+		ft_printf("%s%s", fd > 1 ? str : "", fd > 1 ? "\n" : "");
 		if (ft_add_to_l(str, &lem))
 		{
 			ft_memdel((void **)&str);
-			return (_ERR + system("leaks -q lem_in"));
+			return (_ERR);// + system("leaks -q lem_in"));
 		}
 		ft_memdel((void **)&str);
 	}
+//	ft_printf("%u\n", lem.nb_ant);
 	ft_rooms_links(&lem);
 	ft_ways(&lem);
+	ft_printf("\n");
+	ft_lem(&lem);
 	//ft_printf("i = %s\n", lem.rooms->next->linked_to[0]->name);
-	system("leaks -q lem_in");
+/*	tmp1 = lem.ways;
+	while (tmp1)
+	{
+		w = tmp1->way;
+		while (w)
+		{
+			ft_printf("%7s-->", w->room->name);
+			w = w->next;
+		}
+		if (tmp1->way)
+			ft_printf(" len:%2i, dif:%2i, nb_ant:%2i\n", tmp1->lenght, tmp1->dif, tmp1->nb_ants);
+		tmp1 = tmp1->next;
+	}*/
+	ft_go(&lem);
+	//system("leaks -q lem_in");
 	return (0);
 }
