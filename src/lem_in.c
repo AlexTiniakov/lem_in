@@ -78,6 +78,9 @@ int		ft_rooms(char *str, t_lem_in *lem, int *i)
 		tmp->y = ft_atoi(s[2]);
 		tmp->next = lem->rooms;
 		tmp->deep = 0;
+		tmp->nb_ant = 0;
+		tmp->is_ant = 0;
+		tmp->checked = 0;
 		lem->rooms = tmp;
 		lem->begin = lem->s ? tmp : lem->begin;
 		lem->end = lem->e ? tmp : lem->end;
@@ -97,7 +100,7 @@ int		ft_nb_ant(char *str, t_lem_in *lem, int *i)
 	while(str && str[++j])
 		if (!ft_isdigit((int)str[j]))
 			return (ft_comment(str, lem));
-	if ((lem->nb_ant = ft_atoi_uint(str)) > 0)
+	if ((lem->nb_ant = ft_atoi(str)) > 0)
 		return (++(*i));
 	return (0);
 }

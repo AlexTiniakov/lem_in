@@ -19,7 +19,7 @@ typedef struct		s_lem_in
 {
 	int				s : 1;
 	int				e : 1;
-	uintmax_t				nb_ant;//+
+	int				nb_ant;//+
 	//int				nb_room;
 	//int				nb_links;
 	struct s_room	*begin;//+
@@ -36,8 +36,8 @@ typedef struct		s_room
 	int				x;//+
 	int				y;//+
 	int				deep;//+
-	uintmax_t				nb_ant;
-	uintmax_t				lem_nb;
+	int				nb_ant;
+	int				lem_nb;
 	int				is_ant : 1;
 	int				is_in_way : 1;//+
 	int				checked : 1;//+

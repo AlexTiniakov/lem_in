@@ -125,7 +125,7 @@ void	ft_ways(t_lem_in *lem)
 	i = -1;
 	
 	ft_check_room(lem->begin, lem->end->name, lem);
-/*	tmp = lem->rooms;
+	tmp = lem->rooms;
 	while (tmp)
 	{
 		ft_printf("name: '%s', deep: %i, nb_links: %i ",
@@ -136,7 +136,7 @@ void	ft_ways(t_lem_in *lem)
 		ft_printf("\n");
 		tmp = tmp->next;
 	}
-	tab = lem->links;
+/*	tab = lem->links;
 	while (tab)
 	{
 		ft_printf("%s<-->%s\n", tab->r1->name, tab->r2->name);
