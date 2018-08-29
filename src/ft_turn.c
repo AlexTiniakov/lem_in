@@ -48,12 +48,12 @@ t_turn	*ft_put_down(t_turn *turn, t_room *room, int i)
 	return (turn);
 }
 
-void ft_sort(t_room *room)
+void	ft_sort(t_room *room)
 {
-	int i;
-	int j;
-	int k;
-	t_room *tmp;
+	int		i;
+	int		j;
+	int		k;
+	t_room	*tmp;
 
 	i = -1;
 	while (++i < room->nb_links - 1)
@@ -70,4 +70,41 @@ void ft_sort(t_room *room)
 			}
 		}
 	}
+}
+
+int		ft_count_links(t_room *tmp, t_link *links, int j, int i)
+{
+	t_link *tab;
+
+	tab = links;
+	while (tab)
+	{
+		if (!ft_strcmp(tmp->name, tab->r1->name) ||
+		!ft_strcmp(tmp->name, tab->r2->name))
+		{
+			if (j == 1)
+				tmp->linked_to[i] = ft_strcmp(tmp->name, tab->r1->name) ?
+												tab->r1 : tab->r2;
+			i++;
+		}
+		tab = tab->next;
+	}
+	return (i);
+}
+
+int		ft_check_repeat(t_lem_in *lem, t_link *tmp)
+{
+	t_link	*tab;
+
+	tab = lem->links;
+	while (tab)
+	{
+		if ((!ft_strcmp(tab->r1->name, tmp->r1->name) &&
+		!ft_strcmp(tab->r2->name, tmp->r2->name)) ||
+		(!ft_strcmp(tab->r1->name, tmp->r2->name) &&
+		!ft_strcmp(tab->r2->name, tmp->r1->name)))
+			return (1);
+		tab = tab->next;
+	}
+	return (0);
 }

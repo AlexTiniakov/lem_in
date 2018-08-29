@@ -71,13 +71,9 @@ void	ft_lem(t_lem_in *lem)
 	int nb_ways;
 
 	min = ft_get_min(lem->ways, 2147483647, lem->ways);
-//	ft_printf("min: %i\n", min);
 	nb_ways = ft_count(lem->ways, 0);
-//	ft_printf("nb_ways: %i\n", nb_ways);
 	tab = (lem->nb_ant + ft_sum_dif(lem, min, lem->ways, 0));
-//	ft_printf("nb_ant: %i\ntab: %i\n", lem->nb_ant, tab);
 	x = tab / nb_ways;
 	x += tab % nb_ways ? 1 : 0;
-//	ft_printf("x: %i\n", x);
 	ft_put_nb_ants(lem->ways, x, NULL);
 }

@@ -22,6 +22,7 @@ SRC = src/lem_in.c\
 		src/ft_turn.c\
 		src/ft_lem.c\
 		src/ft_go.c\
+		src/ft_tools.c\
 
 OBJ = $(SRC:.c=.o)
 

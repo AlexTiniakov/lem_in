@@ -12,26 +12,6 @@
 
 #include <lem_in.h>
 
-int		ft_count_links(t_room *tmp, t_link *links, int j, int i)
-{
-	t_link *tab;
-
-	tab = links;
-	while (tab)
-	{
-		if (!ft_strcmp(tmp->name, tab->r1->name) ||
-		!ft_strcmp(tmp->name, tab->r2->name))
-		{
-			if (j == 1)
-				tmp->linked_to[i] = ft_strcmp(tmp->name, tab->r1->name) ?
-												tab->r1 : tab->r2;
-			i++;
-		}
-		tab = tab->next;
-	}
-	return (i);
-}
-
 void	ft_rooms_links(t_lem_in *lem)
 {
 	t_room	*tmp;
@@ -64,7 +44,7 @@ int		ft_strisdigit(char *str)
 	int j;
 
 	j = -1;
-	while(str && str[++j])
+	while (str && str[++j])
 		if (!ft_isdigit((int)str[j]))
 			return (0);
 	return (1);
@@ -81,7 +61,7 @@ int		ft_del_av(char **s)
 	return (0);
 }
 
-t_room		*ft_get_r(char *str, t_lem_in *lem)
+t_room	*ft_get_r(char *str, t_lem_in *lem)
 {
 	t_room	*tmp;
 
