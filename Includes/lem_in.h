@@ -52,12 +52,6 @@ typedef struct		s_link
 	struct s_link	*next;
 }					t_link;
 
-typedef struct		s_linked
-{
-	t_room			*room;
-	struct s_linked	*next;
-}					t_linked;
-
 typedef struct		s_way
 {
 	t_room			*room;

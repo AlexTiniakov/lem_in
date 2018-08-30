@@ -95,11 +95,11 @@ int		main(int ac, char **av)
 	t_way		*w;
 
 	lem.rooms = NULL;
-	if ((fd = ac < 2 ? 1 : open(av[1], O_RDONLY)) == -1)
+	if ((fd = ac < 2 ? 0 : open(av[1], O_RDONLY)) == -1)
 		return (_ERR);
 	while (get_next_line(fd, &str))
 	{
-		ft_printf("%s%s", fd > 1 ? str : "", fd > 1 ? "\n" : "");
+		ft_printf("%s\n", str);
 		if (ft_add_to_l(str, &lem))
 		{
 			ft_memdel((void **)&str);

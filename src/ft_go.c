@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: otiniako <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/28 22:34:46 by otiniako          #+#    #+#             */
-/*   Updated: 2018/08/28 22:34:47 by otiniako         ###   ########.fr       */
+/*   Created: 2018/08/30 11:25:10 by otiniako          #+#    #+#             */
+/*   Updated: 2018/08/30 11:25:12 by otiniako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,9 @@ void	ft_move_all(t_ways *ways, t_lem_in *lem)
 
 	while (ways)
 	{
-		if (ways->way)
+		if (ways->way && (j = ways->nb_ant_is))
 		{
 			i = -1;
-			j = ways->nb_ant_is;
 			while (++i < j)
 				ft_move(ways->way->next, ways, lem);
 		}
@@ -56,7 +55,7 @@ void	ft_check_start(t_lem_in *lem, t_ways *ways)
 	int		i;
 	t_way	*tmp;
 
-	while (ways)
+	while (ways && lem->begin->nb_ant)
 	{
 		if (ways->way && ways->nb_ant_tmp && lem->begin->nb_ant)
 		{

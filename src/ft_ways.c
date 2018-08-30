@@ -100,6 +100,7 @@ void	ft_ways(t_lem_in *lem, int i)
 			lem->ways->way->room = lem->end;
 			lem->ways->way->next = NULL;
 			ft_find_way(lem->ways, lem->end->linked_to[i], lem->begin, NULL);
+			lem->ways->nb_ant_is = 0;
 			lem->ways->next = tmp1;
 		}
 	}
