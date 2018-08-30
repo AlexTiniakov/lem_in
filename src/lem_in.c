@@ -105,7 +105,7 @@ int		main(int ac, char **av)
 		if (ft_add_to_l(str, &lem))
 		{
 			ft_memdel((void **)&str);
-			return (_ERR(lem.nb_ant ? "wrong format of data" : "no lems"));
+			return (_ERR(lem.nb_ant ? _W : "no lems"));
 		}
 		ft_memdel((void **)&str);
 	}

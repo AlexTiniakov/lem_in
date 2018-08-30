@@ -14,6 +14,7 @@
 # define LEM_IN_H
 # define _ERR(s) ft_printf("ERROR: %s\n", s)
 # define _A !(tmp->r2 = ft_get_r(s[1], lem))
+# define _W "wrong format of data"
 # include "libft.h"
 
 typedef struct		s_lem_in
