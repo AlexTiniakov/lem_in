@@ -72,10 +72,11 @@ void	ft_check_start(t_lem_in *lem, t_ways *ways)
 	}
 }
 
-void	ft_go(t_lem_in *lem)
+int		ft_go(t_lem_in *lem)
 {
 	int nb_ant;
 
+	ft_printf("\n");
 	nb_ant = lem->nb_ant;
 	lem->begin->nb_ant = lem->nb_ant;
 	while (lem->end->nb_ant != nb_ant)
@@ -84,4 +85,5 @@ void	ft_go(t_lem_in *lem)
 		ft_check_start(lem, lem->ways);
 		ft_printf("\n");
 	}
+	return (0);
 }

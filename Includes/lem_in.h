@@ -12,7 +12,7 @@
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
-# define _ERR write(1, "ERROR\n", 6)
+# define _ERR(s) ft_printf("ERROR: %s\n", s)
 # define _A !(tmp->r2 = ft_get_r(s[1], lem))
 # include "libft.h"
 
@@ -85,11 +85,12 @@ t_turn				*ft_put_down(t_turn *turn, t_room *room, int i);
 t_room				*ft_get_front(t_turn **turn);
 void				ft_sort(t_room *room);
 void				ft_lem(t_lem_in *lem);
-void				ft_go(t_lem_in *lem);
+int					ft_go(t_lem_in *lem);
 int					ft_count_links(t_room *tmp, t_link *links, int j, int i);
 int					ft_check_repeat(t_lem_in *lem, t_link *tmp);
 void				ft_tool_1(t_room *tmp, t_lem_in *lem, char **s);
 void				ft_tool_2(t_way *tab, t_ways *ways, t_room	*tmp);
 int					ft_check_name(char **s, t_lem_in *lem);
+int					ft_tool_3(t_lem_in *lem, int i);
 
 #endif

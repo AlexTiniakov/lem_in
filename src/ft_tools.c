@@ -38,6 +38,25 @@ void	ft_tool_2(t_way *tab, t_ways *ways, t_room *tmp)
 	ways->lenght++;
 }
 
+int		ft_tool_3(t_lem_in *lem, int i)
+{
+	if (i == 0)
+	{
+		lem->rooms = NULL;
+		lem->begin = NULL;
+		lem->end = NULL;
+		lem->nb_ant = 0;
+		return (0);
+	}
+	if (!lem->nb_ant)
+		return (_ERR("no lems"));
+	else if (!lem->rooms)
+		return (_ERR("no rooms"));
+	else if (!lem->begin || !lem->end)
+		return (_ERR(lem->begin ? "no end room" : "no start room"));
+	return (0);
+}
+
 int		ft_check_name(char **s, t_lem_in *lem)
 {
 	t_room *tmp;

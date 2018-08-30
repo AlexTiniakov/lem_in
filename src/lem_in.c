@@ -53,7 +53,7 @@ int		ft_rooms(char *str, t_lem_in *lem, int *i)
 	ft_strisdigit(s[2]) && !s[3])
 	{
 		if (ft_check_name(s, lem))
-			exit(_ERR);
+			exit(_ERR("the room alredy exists"));
 		if (!(tmp = (t_room *)malloc(sizeof(t_room))))
 			return (0);
 		ft_tool_1(tmp, lem, s);
@@ -96,23 +96,23 @@ int		main(int ac, char **av)
 	t_ways		*tmp1;
 	t_way		*w;
 
-	lem.rooms = NULL;
+	ft_tool_3(&lem, 0);
 	if ((fd = ac < 2 ? 0 : open(av[1], O_RDONLY)) == -1)
-		return (_ERR);
+		return (_ERR("can't open or find the file"));
 	while (get_next_line(fd, &str))
 	{
 		ft_printf("%s\n", str);
 		if (ft_add_to_l(str, &lem))
 		{
 			ft_memdel((void **)&str);
-			return (_ERR);
+			return (_ERR(lem.nb_ant ? "wrong format of data" : "no lems"));
 		}
 		ft_memdel((void **)&str);
 	}
+	if (ft_tool_3(&lem, 1))
+		return (0);
 	ft_rooms_links(&lem);
 	ft_ways(&lem, -1);
-	ft_printf("\n");
 	ft_lem(&lem);
-	ft_go(&lem);
-	return (0);
+	return (ft_go(&lem));
 }
