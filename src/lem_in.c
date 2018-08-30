@@ -52,6 +52,8 @@ int		ft_rooms(char *str, t_lem_in *lem, int *i)
 	if (s && s[0] && s[0][0] != 'L' && s[1] && ft_strisdigit(s[1]) && s[2] &&
 	ft_strisdigit(s[2]) && !s[3])
 	{
+		if (ft_check_name(s, lem))
+			exit(_ERR);
 		if (!(tmp = (t_room *)malloc(sizeof(t_room))))
 			return (0);
 		ft_tool_1(tmp, lem, s);

@@ -25,7 +25,6 @@ typedef struct		s_lem_in
 	struct s_room	*end;
 	struct s_room	*rooms;
 	struct s_link	*links;
-	struct s_way	**way;
 	struct s_ways	*ways;
 }					t_lem_in;
 
@@ -91,5 +90,6 @@ int					ft_count_links(t_room *tmp, t_link *links, int j, int i);
 int					ft_check_repeat(t_lem_in *lem, t_link *tmp);
 void				ft_tool_1(t_room *tmp, t_lem_in *lem, char **s);
 void				ft_tool_2(t_way *tab, t_ways *ways, t_room	*tmp);
+int					ft_check_name(char **s, t_lem_in *lem);
 
 #endif

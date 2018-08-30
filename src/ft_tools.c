@@ -37,3 +37,18 @@ void	ft_tool_2(t_way *tab, t_ways *ways, t_room *tmp)
 	ways->way->next = tab;
 	ways->lenght++;
 }
+
+int		ft_check_name(char **s, t_lem_in *lem)
+{
+	t_room *tmp;
+
+	tmp = lem->rooms;
+	while (tmp)
+	{
+		if (!ft_strcmp(tmp->name, s[0]) ||
+		(ft_atoi(s[1]) == tmp->x && ft_atoi(s[2]) == tmp->y))
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
+}
