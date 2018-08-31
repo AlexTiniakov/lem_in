@@ -73,9 +73,9 @@ void	ft_lem(t_lem_in *lem)
 	min = ft_get_min(2147483647, lem->ways);
 	if (!(nb_ways = ft_count(lem->ways, 0)))
 		exit(_ERR("no ways", lem));
-	tab = (lem->nb_ant + ft_sum_dif(lem, min, lem->ways, 0));
+	tab = (lem->nb_ant + _DIF);
 	if (tab < 0)
-		x = lem->nb_ant / nb_ways + ft_sum_dif(lem, min, lem->ways, 0) / nb_ways;
+		x = lem->nb_ant / nb_ways + _DIF / nb_ways;
 	else
 		x = tab / nb_ways;
 	x += tab % nb_ways ? 1 : 0;

@@ -97,7 +97,7 @@ int		main(int ac, char **av)
 	ft_tool_3(&lem, 0, &ac, &av);
 	if ((fd = ac < 2 ? 0 : open(av[1], O_RDONLY)) == -1)
 		return (_ERR("can't open or find the file", &lem));
-	while (get_next_line(fd, &str))
+	while (get_next_line(fd, &str) && str)
 	{
 		ft_printf("%s%s", lem.q ? "" : str, lem.q ? "" : "\n");
 		if (ft_add_to_l(str, &lem))

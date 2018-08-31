@@ -38,7 +38,7 @@ int		ft_comment(char *str, t_lem_in *lem)
 			lem->e = 1;
 		else if ((!ft_strcmp(str, "##start") && lem->begin) ||
 		(!ft_strcmp(str, "##end") && lem->end))
-			exit(_ERR(ft_strcmp(str, "##end") ? "start already exists" : "end already exists" , lem));
+			exit(_ERR(ft_strcmp(str, "##end") ? _ST : _EN, lem));
 		return (1);
 	}
 	return (0);
