@@ -10,9 +10,9 @@
 #                                                                              #
 #******************************************************************************#
 
-NAME = lem_in
+NAME = lem-in
 
-FLAGS = -I includes/
+FLAGS = -Wall -Wextra -Werror -I includes/
 
 LIB = libft/libft.a
 
@@ -23,6 +23,7 @@ SRC = src/lem_in.c\
 		src/ft_lem.c\
 		src/ft_go.c\
 		src/ft_tools.c\
+		src/ft_flags.c\
 
 OBJ = $(SRC:.c=.o)
 
@@ -33,7 +34,7 @@ $(LIB):
 
 $(NAME): $(OBJ)
 	@gcc -o $(NAME) $(OBJ) $(LIB)
-	@echo "\033[1;92mlem_in are created!\033[1;92m"
+	@echo "\033[1;92mlem_in are created!\033[m"
 
 $(OBJ): %.o: %.c
 	@gcc -c $(FLAGS) -o $@ -c $<

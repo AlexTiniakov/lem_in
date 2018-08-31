@@ -36,7 +36,7 @@ OBJ = $(SRC:.c=.o)
 RM = rm -f
 
 all: $(NAME)
-	@echo "\033[1;92mlibft.a is created!\033[1;92m"
+	@echo "\033[1;92mlibft.a is created!\033[m"
 
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)

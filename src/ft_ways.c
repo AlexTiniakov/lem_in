@@ -12,14 +12,13 @@
 
 #include <lem_in.h>
 
-void	ft_check_room(t_room *begin, char *end, t_lem_in *lem)
+void	ft_check_room(char *end, t_lem_in *lem)
 {
 	static t_turn	*turn = NULL;
 	int				j;
 	t_room			*tmp;
-	t_turn			*tab;
 
-	turn = ft_put_down(turn, lem->begin, 0);
+	turn = ft_put_down(turn, lem->begin, 0, lem);
 	while ((tmp = ft_get_front(&turn)))
 	{
 		j = -1;
@@ -27,7 +26,7 @@ void	ft_check_room(t_room *begin, char *end, t_lem_in *lem)
 		{
 			if (!tmp->linked_to[j]->checked &&
 			ft_strcmp(tmp->linked_to[j]->name, end))
-				turn = ft_put_down(turn, tmp->linked_to[j], 1 + tmp->deep);
+				turn = ft_put_down(turn, tmp->linked_to[j], 1 + tmp->deep, lem);
 		}
 	}
 }
@@ -43,14 +42,14 @@ t_room	*ft_get_room(t_room *room, int i)
 	i = -1;
 	while (++i < room->nb_links)
 	{
-		if ((room->deep - room->linked_to[i]->deep) == 0 &&
+		if ((room->deep - room->linked_to[i]->deep) <= 0 &&
 		!room->linked_to[i]->is_in_way)
 			return (room->linked_to[i]);
 	}
 	return (NULL);
 }
 
-void	ft_find_way(t_ways *ways, t_room *room, t_room *begin, t_way *tab)
+void	ft_find_way(t_ways *ways, t_room *room, t_lem_in *lem, t_way *tab)
 {
 	t_room	*tmp;
 
@@ -73,33 +72,33 @@ void	ft_find_way(t_ways *ways, t_room *room, t_room *begin, t_way *tab)
 		return ;
 	}
 	tab = ways->way;
-	ways->way = (t_way *)malloc(sizeof(t_way));
-	ways->way->room = begin;
+	if (!(ways->way = (t_way *)malloc(sizeof(t_way))))
+		exit(_ERR("not enough memory", lem));
+	ways->way->room = lem->begin;
 	ways->way->next = tab;
 }
 
 void	ft_ways(t_lem_in *lem, int i)
 {
-	t_room	*tmp;
-	t_link	*tab;
 	t_ways	*tmp1;
-	t_way	*w;
 
-	ft_check_room(lem->begin, lem->end->name, lem);
+	ft_check_room(lem->end->name, lem);
 	lem->ways = NULL;
-	i = -1;
 	ft_sort(lem->end);
+	i = -1;
 	while (++i < lem->end->nb_links)
 	{
 		if (lem->end->linked_to[i]->deep > 0 ||
 		!ft_strcmp(lem->end->linked_to[i]->name, lem->begin->name))
 		{
 			tmp1 = lem->ways;
-			lem->ways = (t_ways *)malloc(sizeof(t_ways));
-			lem->ways->way = (t_way *)malloc(sizeof(t_way));
+			if (!(lem->ways = (t_ways *)malloc(sizeof(t_ways))))
+				exit(_ERR("not enough memory", lem));
+			if (!(lem->ways->way = (t_way *)malloc(sizeof(t_way))))
+				exit(_ERR("not enough memory", lem));
 			lem->ways->way->room = lem->end;
 			lem->ways->way->next = NULL;
-			ft_find_way(lem->ways, lem->end->linked_to[i], lem->begin, NULL);
+			ft_find_way(lem->ways, lem->end->linked_to[i], lem, NULL);
 			lem->ways->nb_ant_is = 0;
 			lem->ways->next = tmp1;
 		}

@@ -26,13 +26,14 @@ t_room	*ft_get_front(t_turn **turn)
 	return (tmp);
 }
 
-t_turn	*ft_put_down(t_turn *turn, t_room *room, int i)
+t_turn	*ft_put_down(t_turn *turn, t_room *room, int i, t_lem_in *lem)
 {
 	t_turn *tab;
 	t_turn *tmp;
 
 	tab = turn;
-	tmp = (t_turn *)malloc(sizeof(t_turn));
+	if (!(tmp = (t_turn *)malloc(sizeof(t_turn))))
+		exit(_ERR("not enough memory", lem));
 	tmp->room = room;
 	tmp->room->deep = i;
 	tmp->room->checked = 1;

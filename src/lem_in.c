@@ -22,7 +22,7 @@ int		ft_links(char *str, t_lem_in *lem, int *i, char **s)
 	if (s && s[0] && s[1] && !s[2])
 	{
 		if (!(tmp = (t_link *)malloc(sizeof(t_link))))
-			return (ft_del_av(s));
+			exit(_ERR("not enough memory", lem));
 		if (!(tmp->r1 = ft_get_r(s[0], lem)) || _A)
 		{
 			ft_memdel((void **)&tmp);
@@ -31,7 +31,7 @@ int		ft_links(char *str, t_lem_in *lem, int *i, char **s)
 		if (ft_check_repeat(lem, tmp))
 		{
 			ft_memdel((void **)&tmp);
-			return (ft_del_av(s) + 1);
+			exit(_ERR("link already exists", lem));
 		}
 		tmp->next = lem->links;
 		lem->links = tmp;
@@ -53,9 +53,9 @@ int		ft_rooms(char *str, t_lem_in *lem, int *i)
 	ft_strisdigit(s[2]) && !s[3])
 	{
 		if (ft_check_name(s, lem))
-			exit(_ERR("the room alredy exists"));
+			exit(_ERR("the room already exists", lem));
 		if (!(tmp = (t_room *)malloc(sizeof(t_room))))
-			return (0);
+			exit(_ERR("not enough memory", lem));
 		ft_tool_1(tmp, lem, s);
 		return (ft_del_av(s) + 1);
 	}
@@ -93,26 +93,24 @@ int		main(int ac, char **av)
 	int			fd;
 	char		*str;
 	t_lem_in	lem;
-	t_ways		*tmp1;
-	t_way		*w;
 
-	ft_tool_3(&lem, 0);
+	ft_tool_3(&lem, 0, &ac, &av);
 	if ((fd = ac < 2 ? 0 : open(av[1], O_RDONLY)) == -1)
-		return (_ERR("can't open or find the file"));
+		return (_ERR("can't open or find the file", &lem));
 	while (get_next_line(fd, &str))
 	{
-		ft_printf("%s\n", str);
+		ft_printf("%s%s", lem.q ? "" : str, lem.q ? "" : "\n");
 		if (ft_add_to_l(str, &lem))
 		{
 			ft_memdel((void **)&str);
-			return (_ERR(lem.nb_ant ? _W : "no lems"));
+			return (_ERR(lem.nb_ant ? _W : "no lems", &lem));
 		}
 		ft_memdel((void **)&str);
 	}
-	if (ft_tool_3(&lem, 1))
+	if (ft_tool_3(&lem, 1, &ac, &av))
 		return (0);
 	ft_rooms_links(&lem);
 	ft_ways(&lem, -1);
 	ft_lem(&lem);
-	return (ft_go(&lem));
+	return (ft_go(&lem) + lem.l ? _L : 0);
 }

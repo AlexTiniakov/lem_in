@@ -26,8 +26,8 @@ void	ft_move(t_way *tmp, t_ways *ways, t_lem_in *lem)
 		tmp->room->nb_ant--;
 		tmp->next->room->nb_ant++;
 		tmp->next->room->lem_nb = tmp->room->lem_nb;
-		ft_printf("L%i-%s ", tmp->room->lem_nb,
-		tmp->next->room->name);
+		if (!lem->v)
+			ft_printf("L%i-%s ", tmp->room->lem_nb, _N1);
 	}
 	if (!ft_strcmp(lem->end->name, tmp->next->room->name))
 		ways->nb_ant_is--;
@@ -52,9 +52,6 @@ void	ft_move_all(t_ways *ways, t_lem_in *lem)
 
 void	ft_check_start(t_lem_in *lem, t_ways *ways)
 {
-	int		i;
-	t_way	*tmp;
-
 	while (ways && lem->begin->nb_ant)
 	{
 		if (ways->way && ways->nb_ant_tmp && lem->begin->nb_ant)
@@ -65,8 +62,8 @@ void	ft_check_start(t_lem_in *lem, t_ways *ways)
 			if (ft_strcmp(lem->end->name, ways->way->next->room->name))
 				ways->nb_ant_is++;
 			ways->way->next->room->lem_nb = lem->nb_ant - lem->begin->nb_ant;
-			ft_printf("L%i-%s ", ways->way->next->room->lem_nb,
-			ways->way->next->room->name);
+			if (!lem->v)
+				ft_printf("L%i-%s ", ways->way->next->room->lem_nb, _N2);
 		}
 		ways = ways->next;
 	}
@@ -81,9 +78,13 @@ int		ft_go(t_lem_in *lem)
 	lem->begin->nb_ant = lem->nb_ant;
 	while (lem->end->nb_ant != nb_ant)
 	{
+		if (lem->v)
+			ft_visualiz(lem, NULL, NULL);
 		ft_move_all(lem->ways, lem);
 		ft_check_start(lem, lem->ways);
 		ft_printf("\n");
 	}
+	if (lem->v)
+		ft_visualiz(lem, NULL, NULL);
 	return (0);
 }
