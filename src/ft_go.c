@@ -59,7 +59,7 @@ void	ft_check_start(t_lem_in *lem, t_ways *ways)
 			lem->begin->nb_ant--;
 			ways->nb_ant_tmp--;
 			ways->way->next->room->nb_ant++;
-			if (ft_strcmp(lem->end->name, ways->way->next->room->name))
+			if (ft_strcmp(lem->end->name, ways->way->next->room->name))//check it
 				ways->nb_ant_is++;
 			ways->way->next->room->lem_nb = lem->nb_ant - lem->begin->nb_ant;
 			if (!lem->v)
