@@ -14,14 +14,13 @@
 
 void	ft_move(t_way *tmp, t_ways *ways, t_lem_in *lem)
 {
-	tmp = ways->way->next;
 	while (tmp && tmp->next && !tmp->room->nb_ant &&
 	ft_strcmp(lem->end->name, tmp->next->room->name))
 		tmp = tmp->next;
 	while (tmp && tmp->next && tmp->next->room->nb_ant == 1 &&
 	ft_strcmp(lem->end->name, tmp->next->room->name))
 		tmp = tmp->next;
-	if (tmp->room->nb_ant && tmp->next)
+	if (tmp->room->nb_ant > 0 && tmp->next)
 	{
 		tmp->room->nb_ant--;
 		tmp->next->room->nb_ant++;
@@ -54,7 +53,7 @@ void	ft_check_start(t_lem_in *lem, t_ways *ways)
 {
 	while (ways && lem->begin->nb_ant)
 	{
-		if (ways->way && ways->nb_ant_tmp && lem->begin->nb_ant)
+		if (ways->way && ways->nb_ant_tmp > 0 && lem->begin->nb_ant > 0)
 		{
 			lem->begin->nb_ant--;
 			ways->nb_ant_tmp--;

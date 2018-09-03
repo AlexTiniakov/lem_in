@@ -42,7 +42,7 @@ t_room	*ft_get_room(t_room *room, int i)
 	i = -1;
 	while (++i < room->nb_links)
 	{
-		if ((room->deep - room->linked_to[i]->deep) <= 0 &&
+		if ((room->deep - room->linked_to[i]->deep) == 0 &&
 		!room->linked_to[i]->is_in_way)
 			return (room->linked_to[i]);
 	}

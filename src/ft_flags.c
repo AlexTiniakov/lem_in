@@ -70,6 +70,17 @@ void	ft_debuger(t_lem_in *lem, t_ways *tmp1, t_way *w)
 	}
 }
 
+t_way	*ft_print_ways(t_ways *tmp1, t_way *w, int j, t_lem_in *lem)
+{
+	while (w && w->next)
+	{
+		printf("%s%s\033[m%s-%s-%s-%s-%s>\033[m",
+		_S1, _S2, _S3, _S4, _S5, _S6, _S7);
+		w = w->next;
+	}
+	return (w);
+}
+
 void	ft_visualiz(t_lem_in *lem, t_ways *tmp1, t_way *w)
 {
 	int j;
@@ -77,21 +88,19 @@ void	ft_visualiz(t_lem_in *lem, t_ways *tmp1, t_way *w)
 	j = 0;
 	while (j++ < 6)
 	{
-		ft_printf("\033[2J\033[%d;%dH", 0, 0);
+		printf("\033[2J\033[%d;%dH", 0, 0);
 		tmp1 = lem->ways;
 		while (tmp1)
 		{
-			w = tmp1->way;
-			while (w && w->next)
+			if (tmp1->nb_ants > 0)
 			{
-				ft_printf("%s%s\033[m%s-%s-%s-%s-%s>\033[m",
-				_S1, _S2, _S3, _S4, _S5, _S6, _S7);
-				w = w->next;
+				w = tmp1->way;
+				w = ft_print_ways(tmp1, w, j, lem);
+				if (w && w->room)
+					printf("%s%s%s", _T2, w->room->name, "\033[m");
+				if (tmp1->way)
+					printf(" nb_ant_end:%2i\n", lem->end->nb_ant);
 			}
-			if (w && w->room)
-				ft_printf("%s%s%s", _T2, w->room->name, "\033[m");
-			if (tmp1->way)
-				ft_printf(" nb_ant:%2i\n", tmp1->nb_ants);
 			tmp1 = tmp1->next;
 		}
 		usleep(j == 1 ? 200000 : 50000);

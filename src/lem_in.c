@@ -28,11 +28,6 @@ int		ft_links(char *str, t_lem_in *lem, int *i, char **s)
 			ft_memdel((void **)&tmp);
 			return (ft_del_av(s));
 		}
-		if (ft_check_repeat(lem, tmp))
-		{
-			ft_memdel((void **)&tmp);
-			exit(_ERR("link already exists", lem));
-		}
 		tmp->next = lem->links;
 		lem->links = tmp;
 		*i = 2;
