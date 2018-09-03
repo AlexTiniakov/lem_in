@@ -91,6 +91,7 @@ typedef struct		s_ways
 	int				nb_ant_is;
 	int				lenght;
 	int				dif;
+	int				count;
 	t_way			*way;
 	struct s_ways	*next;
 }					t_ways;
@@ -125,5 +126,7 @@ void				ft_init_lem(t_lem_in *lem);
 int					ft_flags(t_lem_in *lem, int ac, char **av, int i);
 void				ft_debuger(t_lem_in *lem, t_ways *tmp1, t_way *w);
 void				ft_visualiz(t_lem_in *lem, t_ways *tmp1, t_way *w);
+int					ft_sum_dif(t_lem_in *lem, int min, t_ways *tmp, int rez);
+int					ft_get_min(int min, t_ways *tmp);
 
 #endif

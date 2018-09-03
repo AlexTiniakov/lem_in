@@ -12,6 +12,17 @@
 
 #include <lem_in.h>
 
+int		ft_get_min(int min, t_ways *tmp)
+{
+	while (tmp)
+	{
+		if (tmp->way)
+			min = min < tmp->lenght ? min : tmp->lenght;
+		tmp = tmp->next;
+	}
+	return (min);
+}
+
 void	ft_move(t_way *tmp, t_ways *ways, t_lem_in *lem)
 {
 	while (tmp && tmp->next && !tmp->room->nb_ant &&
