@@ -99,7 +99,7 @@ void	ft_visualiz(t_lem_in *lem, t_ways *tmp1, t_way *w)
 				if (w && w->room)
 					printf("%s%s%s", _T2, w->room->name, "\033[m");
 				if (tmp1->way)
-					printf(" nb_ant_end:%2i\n", lem->end->nb_ant);
+					printf("\n");
 			}
 			tmp1 = tmp1->next;
 		}

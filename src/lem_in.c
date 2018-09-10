@@ -47,6 +47,8 @@ int		ft_rooms(char *str, t_lem_in *lem, int *i)
 	if (s && s[0] && s[0][0] != 'L' && s[1] && ft_strisdigit(s[1]) && s[2] &&
 	ft_strisdigit(s[2]) && !s[3])
 	{
+		if (!ft_strisdigit(ft_strchr(ft_strchr(str, ' ') + 1, ' ') + 1))
+			exit(_ERR("too many spases at line", lem));
 		if (ft_check_name(s, lem))
 			exit(_ERR("the room already exists", lem));
 		if (!(tmp = (t_room *)malloc(sizeof(t_room))))
